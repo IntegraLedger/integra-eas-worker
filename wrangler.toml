@@ -1,0 +1,36 @@
+name = "integra-eas-worker"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+# Durable Objects
+[[durable_objects.bindings]]
+name = "ATTESTATION_TRACKER"
+class_name = "AttestationTracker"
+script_name = "integra-eas-worker"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["AttestationTracker"]
+
+# D1 Databases
+[[d1_databases]]
+binding = "SHARED_REGISTRY_PROD"
+database_name = "shared-registry-prod"
+database_id = "YOUR_DATABASE_ID_HERE"
+
+# User org databases will be bound here
+# [[d1_databases]]
+# binding = "ORG_DB_001"
+# database_name = "org-db-001"
+# database_id = "YOUR_ORG_DB_ID_HERE"
+
+# Environment Variables
+[vars]
+ETHEREUM_EAS_ADDRESS = "0xA1207F3BBa224E2c9c3c6D5aF63D0eb1582Ce587"
+POLYGON_EAS_ADDRESS = "0x5E634ef5355f45A855d02D66eCD687b1502AF790"
+
+# Secrets (set via: wrangler secret put <NAME>)
+# - RABBITMQ_URL
+# - INTERNAL_SIGNING_KEY
+# - ETHEREUM_SCHEMA_UIDS (JSON object)
+# - POLYGON_SCHEMA_UIDS (JSON object)
